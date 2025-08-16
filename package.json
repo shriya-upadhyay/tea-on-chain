@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@dynamic-labs/ethereum": "^4.27.0",
+    "@dynamic-labs/sdk-react-core": "^4.27.0",
+    "@dynamic-labs/solana": "^4.27.0",
+    "@dynamic-labs/sui": "^4.27.0",
     "dotenv": "^17.2.1",
     "mongoose": "^8.17.1",
     "next": "15.4.6",
