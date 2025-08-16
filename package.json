@@ -6,23 +6,33 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "setup-circuit": "chmod +x scripts/setup-circuit.sh && ./scripts/setup-circuit.sh",
+    "test-proof": "node scripts/test-zk-proof.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@types/uuid": "^10.0.0",
+    "circomlibjs": "^0.1.7",
     "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "form-data": "^4.0.4",
     "mongoose": "^8.17.1",
     "next": "15.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "uuid": "^11.1.0"
+    "snarkjs": "^0.7.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/circomlibjs": "^0.1.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/snarkjs": "^0.7.9",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "tailwindcss": "^4",

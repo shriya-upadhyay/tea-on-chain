@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ZK proof dependencies
+circomlib/
+*.ptau
+pot*.ptau
+.idea/
+*.sym

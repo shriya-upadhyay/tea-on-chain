@@ -7,4 +7,4 @@ export default function InstrPopup1Page() {
       </div>
     </div>
   );
-} 
+}   
