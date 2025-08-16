@@ -19,11 +19,11 @@ const originalEnv = process.env.NODE_ENV;
 describe('ZK Proof System', () => {
   
   beforeAll(() => {
-    process.env.NODE_ENV = 'test';
+    // process.env.NODE_ENV = 'test';
   });
   
   afterAll(() => {
-    process.env.NODE_ENV = originalEnv;
+    // process.env.NODE_ENV = originalEnv;
   });
   
   describe('generateCommitmentForVerification', () => {
