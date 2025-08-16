@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
         externalBankAccount: {
           accountNumber: '00123456789',
           bankName: 'Chase Bank',
-          bankAccountCurrency: 'USD',
+          bankAccountCurrency: 'PYUSD',
         },
       },
       quote: {
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
         destinationAmount: '100',
         fees: {
           feeCurrency: {
-            label: 'USDC',
+            label: 'PYUSD',
             chain: 'ARBITRUM',
             contractAddress: '0x123456789abcd123456789abcd123456789abcd',
             currencyDecimals: 18,
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
             "destinationPaymentAccountId": 'mock-crypto-wallet-id',
             "destinationPaymentMethod": "ARBITRUM",
             "destinationCurrency": {
-                "label": "USDC",
+                "label": "PYUSD",
                 "chain": "ARBITRUM",
                 "contractAddress": "0x123456789abcd123456789abcd123456789abcd",
                 "currencyDecimals": 6
@@ -184,7 +184,7 @@ export async function POST(req: NextRequest) {
         destination: {
           destinationPaymentAccountId: cryptoWalletData.paymentAccountId,
           destinationPaymentMethod: "ARBITRUM",
-          destinationCurrency: "USDC"
+          destinationCurrency: "PYUSD"
         },
         developerFee: {
           developerFeeType: "USD",

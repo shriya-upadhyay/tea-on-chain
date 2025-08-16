@@ -5,7 +5,7 @@ const SUBMIT_TX_API_URL = 'https://api.example.com/submit-transaction';
 
 export async function POST(req: NextRequest) {
     if (process.env.USE_MOCKS === 'true') {
-        const { customerId, bankAccountData, cryptoWallet, amount, cryptoCurrency = "USDC", chain = "ARBITRUM" } = await req.json();
+        const { customerId, bankAccountData, cryptoWallet, amount, cryptoCurrency = "PYUSD", chain = "ARBITRUM" } = await req.json();
         return NextResponse.json({ 
             quoteData: {
                 "quoteId": "quote_abc123",
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
                 "destinationAmount": "100",
                 "fees": {
                     "feeCurrency": {
-                    "label": "USDC",
+                    "label": cryptoCurrency,
                     "chain": "ETHEREUM",
                     "contractAddress": "0x123456789abcd123456789abcd123456789abcd",
                     "currencyDecimals": 18
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
                 "source": {
                     "sourcePaymentAccountId": cryptoWallet.paymentAccountId,
                     "sourceCurrency": {
-                    "label": "USDC",
+                    "label": cryptoCurrency,
                     "chain": "ARBITRUM",
                     "contractAddress": "0x123456789abcd123456789abcd123456789abcd",
                     "currencyDecimals": 6
@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
                 },
                 "fees": {
                     "feeCurrency": {
-                    "label": "USDC",
+                    "label": cryptoCurrency,
                     "chain": "ETHEREUM",
                     "contractAddress": "0x123456789abcd123456789abcd123456789abcd",
                     "currencyDecimals": 18
@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
 
     }
     try {
-        const { customerId, cryptoWallet, bankAccountData, amount, cryptoCurrency = "USDC", chain = "ARBITRUM" } = await req.json();
+        const { customerId, cryptoWallet, bankAccountData, amount, cryptoCurrency = "PYUSD", chain = "ARBITRUM" } = await req.json();
 
          if (!customerId) {
             return NextResponse.json({ error: 'customerId is required' }, { status: 400 });
@@ -114,7 +114,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'bankAccountData.paymentAccountId is required' }, { status: 400 });
             }
             if (amount == null) {
-            return NextResponse.json({ error: 'amount (sourceAmount in USDC) is required' }, { status: 400 });
+            return NextResponse.json({ error: 'amount (sourceAmount in ) ' + cryptoCurrency +  'is required' }, { status: 400 });
         }
         // Call the quotes API
        const quoteRes = await fetch('https://api.fernhq.com/quotes', {
