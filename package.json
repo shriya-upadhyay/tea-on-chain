@@ -22,7 +22,7 @@
     "next": "15.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
     "snarkjs": "^0.7.5"
   },
   "devDependencies": {
