@@ -23,7 +23,6 @@ export default function InfoPage() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/background.png')" }}
-        aria-hidden
       />
       {/* Soft brand overlay to keep text readable */}
       <div className="absolute inset-0"/>
@@ -34,7 +33,7 @@ export default function InfoPage() {
           {/* Header */}
           <div className="text-center mb-8 sm:mb-10">
             <h1
-              className="text-3xl sm:text-4xl font-bold text-[black] tracking-tight"
+              className="text-3xl sm:text-4xl font-bold text-[#582A55] tracking-tight"
               style={{ fontFamily: "'Moirai One', cursive" }}
             >
               Create your private profile
