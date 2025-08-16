@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZK Proof Testing Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .test-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .test-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #38a169;
+        }
+        
+        .btn-danger {
+            background: #f56565;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #e53e3e;
+        }
+        
+        .output {
+            background: #1a202c;
+            color: #68d391;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        
+        .output.error {
+            color: #fc8181;
+        }
+        
+        .output.info {
+            color: #90cdf4;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .status.success {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        
+        .status.failed {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        
+        .status.pending {
+            background: #feebc8;
+            color: #744210;
+        }
+        
+        .file-upload {
+            margin: 15px 0;
+        }
+        
+        .file-upload input[type="file"] {
+            padding: 8px;
+            border: 2px dashed #cbd5e0;
+            border-radius: 6px;
+            width: 100%;
+        }
+        
+        .info-box {
+            background: #edf2f7;
+            border-left: 4px solid #667eea;
+            padding: 12px;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 ZK Proof Testing Interface</h1>
+            <p>Test zero-knowledge proof generation for gender verification</p>
+        </div>
+        
+        <div class="content">
+            <!-- Mock Testing Section -->
+            <div class="test-section">
+                <h2>1. Mock Testing (No Circuit Required)</h2>
+                <div class="info-box">
+                    Test the API flow with mock data. This doesn't require circuit files or real image processing.
+                </div>
+                <div class="test-controls">
+                    <button class="btn btn-primary" onclick="testMock('female')">
+                        Test Female ✓
+                    </button>
+                    <button class="btn btn-danger" onclick="testMock('male')">
+                        Test Male ✗
+                    </button>
+                    <button class="btn btn-secondary" onclick="testMock('unknown')">
+                        Test Unknown ✗
+                    </button>
+                </div>
+                <div id="mock-output" class="output"></div>
+            </div>
+            
+            <!-- Circuit Testing Section -->
+            <div class="test-section">
+                <h2>2. Circuit Testing (Requires Setup)</h2>
+                <div class="info-box">
+                    Test actual ZK proof generation. Run <code>npm run setup-circuit</code> first.
+                </div>
+                <div class="test-controls">
+                    <button class="btn btn-primary" onclick="testCircuit()">
+                        Generate ZK Proof
+                    </button>
+                    <button class="btn btn-secondary" onclick="verifyLastProof()">
+                        Verify Last Proof
+                    </button>
+                </div>
+                <div id="circuit-output" class="output"></div>
+            </div>
+            
+            <!-- Real Image Testing Section -->
+            <div class="test-section">
+                <h2>3. Real Image Testing (Requires Gemini API)</h2>
+                <div class="info-box">
+                    Upload a real ID document image. Requires GEMINI_API_KEY in .env file.
+                </div>
+                <div class="file-upload">
+                    <input type="file" id="imageFile" accept="image/*" />
+                </div>
+                <div class="test-controls">
+                    <button class="btn btn-primary" onclick="testRealImage()">
+                        Process Image
+                    </button>
+                </div>
+                <div id="image-output" class="output"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let lastProof = null;
+        let lastToken = null;
+        let lastUserId = null;
+        
+        // Utility function to log output
+        function log(elementId, message, type = 'info') {
+            const output = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            const prefix = type === 'error' ? '❌' : type === 'success' ? '✅' : 'ℹ️';
+            output.innerHTML += `[${timestamp}] ${prefix} ${message}\n`;
+            output.scrollTop = output.scrollHeight;
+            output.className = `output ${type}`;
+        }
+        
+        // Clear output
+        function clearLog(elementId) {
+            document.getElementById(elementId).innerHTML = '';
+        }
+        
+        // Test with mock data
+        async function testMock(gender) {
+            clearLog('mock-output');
+            log('mock-output', `Testing with mock gender: ${gender}`);
+            
+            const userId = `test-user-${Date.now()}`;
+            
+            try {
+                const response = await fetch('/api/verify-female-mock', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        mockGender: gender,
+                        userId: userId
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    log('mock-output', 'Success! ZK Proof generated', 'success');
+                    log('mock-output', `Commitment: ${result.commitment}`);
+                    log('mock-output', `Token: ${result.verificationToken}`);
+                    log('mock-output', `Proof: ${JSON.stringify(result.proof, null, 2)}`);
+                    
+                    // Store for verification
+                    lastProof = result.proof;
+                    lastToken = result.verificationToken;
+                    lastUserId = userId;
+                    
+                    log('mock-output', 'Proof stored. You can now verify it using the token.', 'success');
+                } else {
+                    log('mock-output', `Verification failed: ${result.message || result.error}`, 'error');
+                }
+            } catch (error) {
+                log('mock-output', `Error: ${error.message}`, 'error');
+            }
+        }
+        
+        // Test circuit directly
+        async function testCircuit() {
+            clearLog('circuit-output');
+            log('circuit-output', 'Checking circuit files...');
+            
+            try {
+                // First, check if circuits exist
+                const checkResponse = await fetch('/api/verify-female-mock', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        mockGender: 'female',
+                        userId: `circuit-test-${Date.now()}`
+                    })
+                });
+                
+                const result = await checkResponse.json();
+                
+                if (result.error && result.error.includes('Circuit files not found')) {
+                    log('circuit-output', 'Circuit files not found!', 'error');
+                    log('circuit-output', 'Run: npm run setup-circuit', 'error');
+                    log('circuit-output', 'This will compile the circuit and generate proving keys', 'info');
+                } else if (result.success) {
+                    log('circuit-output', 'Circuit test successful!', 'success');
+                    log('circuit-output', `Public signals: ${JSON.stringify(result.proof.publicSignals)}`);
+                    log('circuit-output', `Proof verified: ${result.proof.verified}`, 'success');
+                    
+                    lastProof = result.proof;
+                    lastToken = result.verificationToken;
+                    lastUserId = result.proof.metadata.userId;
+                } else {
+                    log('circuit-output', `Error: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                log('circuit-output', `Error: ${error.message}`, 'error');
+            }
+        }
+        
+        // Verify the last generated proof
+        async function verifyLastProof() {
+            clearLog('circuit-output');
+            
+            if (!lastProof || !lastToken || !lastUserId) {
+                log('circuit-output', 'No proof to verify. Generate one first!', 'error');
+                return;
+            }
+            
+            log('circuit-output', 'Verifying last generated proof...');
+            
+            try {
+                const response = await fetch('/api/verify-proof', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        proof: lastProof,
+                        userId: lastUserId,
+                        verificationToken: lastToken
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.valid) {
+                    log('circuit-output', 'Proof verification successful!', 'success');
+                    log('circuit-output', result.message, 'success');
+                    log('circuit-output', `Commitment: ${result.commitment}`);
+                    
+                    // Clear after successful verification (single-use)
+                    lastProof = null;
+                    lastToken = null;
+                    lastUserId = null;
+                    log('circuit-output', 'Token used and invalidated (single-use)', 'info');
+                } else {
+                    log('circuit-output', 'Proof verification failed!', 'error');
+                    log('circuit-output', result.message || result.error, 'error');
+                }
+            } catch (error) {
+                log('circuit-output', `Error: ${error.message}`, 'error');
+            }
+        }
+        
+        // Test with real image
+        async function testRealImage() {
+            clearLog('image-output');
+            
+            const fileInput = document.getElementById('imageFile');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                log('image-output', 'Please select an image file', 'error');
+                return;
+            }
+            
+            log('image-output', `Processing image: ${file.name}`);
+            log('image-output', `File size: ${(file.size / 1024).toFixed(2)} KB`);
+            
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('id', `real-test-${Date.now()}`);
+            
+            try {
+                const response = await fetch('/api/verify-female', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    log('image-output', 'Success! Document verified as FEMALE', 'success');
+                    log('image-output', `Commitment: ${result.commitment}`);
+                    log('image-output', `Token: ${result.verificationToken}`);
+                    log('image-output', 'ZK Proof generated successfully!', 'success');
+                    
+                    lastProof = result.proof;
+                    lastToken = result.verificationToken;
+                    lastUserId = formData.get('id');
+                } else {
+                    log('image-output', `Verification failed: ${result.message || result.error}`, 'error');
+                    
+                    if (result.error && result.error.includes('GEMINI_API_KEY')) {
+                        log('image-output', 'Add GEMINI_API_KEY to your .env file', 'info');
+                        log('image-output', 'Get free key at: https://makersuite.google.com/app/apikey', 'info');
+                    }
+                }
+            } catch (error) {
+                log('image-output', `Error: ${error.message}`, 'error');
+            }
+        }
+        
+        // Initial message
+        window.onload = () => {
+            log('mock-output', 'Ready for mock testing. Click a button to start.', 'info');
+            log('circuit-output', 'Ready for circuit testing. Generate a proof to begin.', 'info');
+            log('image-output', 'Ready for image testing. Upload an ID document.', 'info');
+        };
+    </script>
+</body>
+</html>
