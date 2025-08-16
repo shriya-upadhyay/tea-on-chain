@@ -16,6 +16,8 @@ export default function ConnectWalletPage() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/background.png')" }}
+        aria-
+
       />
       <div
         className="absolute inset-0"
