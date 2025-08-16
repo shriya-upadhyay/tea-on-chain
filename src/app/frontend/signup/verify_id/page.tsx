@@ -68,7 +68,6 @@ export default function VerifyId() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/background.png')" }}
-        aria-hidden
       />
       <div className="absolute inset-0" aria-hidden />
 
@@ -102,7 +101,6 @@ export default function VerifyId() {
                   <img src={idPreview} alt="ID preview" className="max-h-40 rounded-xl object-contain" />
                 ) : (
                   <>
-                    <span className="text-2xl">📎</span>
                     <span className="text-sm text-[#8B6F74]">Click to upload a clear photo of your ID</span>
                     <span className="text-xs text-[#8B6F74]">JPG/PNG, up to ~10MB</span>
                   </>
@@ -131,7 +129,6 @@ export default function VerifyId() {
                   <img src={selfiePreview} alt="Selfie preview" className="max-h-40 rounded-xl object-contain" />
                 ) : (
                   <>
-                    <span className="text-2xl">🤳</span>
                     <span className="text-sm text-[#8B6F74]">Click to upload a selfie (no hat, good light)</span>
                     <span className="text-xs text-[#8B6F74]">JPG/PNG, up to ~10MB</span>
                   </>
@@ -160,14 +157,16 @@ export default function VerifyId() {
             <button
               onClick={handleVerify}
               disabled={disabled}
-              className="w-full rounded-full bg-[#000000] hover:bg-[#2A2A2A]
+              className="w-full rounded-full bg-[#1B1B1B] hover:bg-[#2A2A2A]
                         text-white text-base sm:text-lg font-semibold py-3.5
                         shadow-lg shadow-black/10 transition-transform hover:scale-[1.02]
                         focus:outline-none focus:ring-2 focus:ring-[#FF2D91]/40
-                        disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled:bg-[#1B1B1B] disabled:hover:bg-[#1B1B1B] disabled:opacity-100 disabled:cursor-not-allowed
+                        [background-image:none]"
             >
               Verify & Continue
             </button>
+
             </div>
           </div>
 
