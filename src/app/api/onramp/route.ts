@@ -81,6 +81,7 @@ export async function POST(req: NextRequest) {
       },
     }, { status: 200 });
   }
+
   try {
     const { customerId } = await req.json();
 
@@ -185,6 +186,7 @@ export async function POST(req: NextRequest) {
           destinationPaymentAccountId: cryptoWalletData.paymentAccountId,
           destinationPaymentMethod: "ARBITRUM",
           destinationCurrency: "PYUSD"
+
         },
         developerFee: {
           developerFeeType: "USD",
