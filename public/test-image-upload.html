@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Image Upload</title>
+</head>
+<body>
+    <h1>Test Real Image Upload to /api/verify-female</h1>
+    
+    <div>
+        <h2>Step 1: Upload an ID Document</h2>
+        <input type="file" id="imageFile" accept="image/*">
+        <button onclick="testUpload()">Upload and Generate ZK Proof</button>
+    </div>
+    
+    <div id="result" style="margin-top: 20px; padding: 10px; background: #f0f0f0; font-family: monospace; white-space: pre-wrap;"></div>
+    
+    <script>
+        async function testUpload() {
+            const resultDiv = document.getElementById('result');
+            const fileInput = document.getElementById('imageFile');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                resultDiv.textContent = 'Please select a file first';
+                return;
+            }
+            
+            resultDiv.textContent = 'Uploading image and processing...\n';
+            resultDiv.textContent += `File: ${file.name}\n`;
+            resultDiv.textContent += `Size: ${(file.size / 1024).toFixed(2)} KB\n`;
+            resultDiv.textContent += `Type: ${file.type}\n\n`;
+            
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('id', 'test-user-' + Date.now());
+            
+            try {
+                resultDiv.textContent += 'Sending to /api/verify-female...\n';
+                resultDiv.textContent += 'This will:\n';
+                resultDiv.textContent += '1. Use Gemini API to read SEX/GENDER field\n';
+                resultDiv.textContent += '2. Generate ZK proof if female (60-90 seconds)\n\n';
+                
+                const response = await fetch('/api/verify-female', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    resultDiv.textContent += '✅ SUCCESS!\n\n';
+                    resultDiv.textContent += 'ZK Proof Generated:\n';
+                    resultDiv.textContent += `Commitment: ${result.commitment}\n`;
+                    resultDiv.textContent += `Token: ${result.verificationToken}\n\n`;
+                    resultDiv.textContent += 'Proof Object:\n';
+                    resultDiv.textContent += JSON.stringify(result.proof, null, 2);
+                    
+                    // Store for verification
+                    window.lastProof = result.proof;
+                    window.lastToken = result.verificationToken;
+                    window.lastUserId = formData.get('id');
+                    
+                    resultDiv.textContent += '\n\n✅ Proof stored. You can now verify it.';
+                } else {
+                    resultDiv.textContent += '❌ FAILED\n\n';
+                    resultDiv.textContent += result.message || result.error || 'Unknown error';
+                    
+                    if (result.message && result.message.includes('Document does not indicate female')) {
+                        resultDiv.textContent += '\n\n📝 Note: The document shows MALE or the gender field could not be read.';
+                    }
+                }
+            } catch (error) {
+                resultDiv.textContent += '❌ ERROR: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
