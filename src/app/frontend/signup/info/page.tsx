@@ -1,4 +1,21 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 export default function InfoPage() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const router = useRouter();
+
+  const handleContinue = () => {
+    if (fullName.trim() && email.trim()) {
+      router.push("/frontend/signup/connect_wallet");
+    } else {
+      alert("Please fill in both full name and email");
+    }
+  };
+
   return (
     <div className="space-y-8">
       <div className="max-w-md mx-auto">
@@ -17,6 +34,8 @@ export default function InfoPage() {
                 type="text"
                 id="fullName"
                 name="fullName"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
                 placeholder="Enter your full name"
                 className="w-full px-3 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF5884] focus:border-transparent"
               />
@@ -30,12 +49,17 @@ export default function InfoPage() {
                 type="email"
                 id="email"
                 name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
                 className="w-full px-3 py-2 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF5884] focus:border-transparent"
               />
             </div>
             
-            <button className="w-full bg-[#FF5884] hover:bg-[#E04A7A] text-white font-semibold py-3 px-4 rounded-lg transition-colors mt-6">
+            <button 
+              onClick={handleContinue}
+              className="w-full bg-[#FF5884] hover:bg-[#E04A7A] text-white font-semibold py-3 px-4 rounded-lg transition-colors mt-6"
+            >
               Continue
             </button>
           </div>
