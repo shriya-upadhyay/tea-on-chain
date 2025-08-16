@@ -28,16 +28,17 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@jest/globals": "^30.0.5",
-    "@tailwindcss/postcss": "^4",
     "@types/circomlibjs": "^0.1.6",
     "@types/jest": "^30.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/snarkjs": "^0.7.9",
+    "autoprefixer": "^10.4.16",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
-    "tailwindcss": "^4",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0",
     "typescript": "^5"
   }
 }
