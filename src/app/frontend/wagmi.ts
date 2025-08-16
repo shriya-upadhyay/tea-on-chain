@@ -1,10 +1,11 @@
 import { http, createConfig } from "wagmi";
 import { mainnet, sepolia } from "wagmi/chains";
-import { gemini } from 'wagmi/connectors';
+import { EthereumWalletConnectors } from '@dynamic-labs/ethereum';
+import { DynamicWagmiConnector } from '@dynamic-labs/wagmi-connector';
 
 export const config = createConfig({
   chains: [mainnet, sepolia],
-  connectors: [gemini()],
+  multiInjectedProviderDiscovery: false, // Dynamic implements this protocol itself
   ssr: true,
   transports: {
     [mainnet.id]: http(),

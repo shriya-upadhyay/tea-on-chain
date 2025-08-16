@@ -1,11 +1,12 @@
 "use client";
 
 import { useAuth } from '../contexts/AuthContext';
+import { ContractBalance } from './ContractBalance';
 
 export function WalletStatus() {
-  const { isConnected, address, disconnect } = useAuth();
+  const { isConnected, disconnect } = useAuth();
 
-  if (!isConnected || !address) {
+  if (!isConnected) {
     return (
       <div className="flex items-center space-x-2">
         <div className="w-2 h-2 bg-red-400 rounded-full"></div>
@@ -16,14 +17,8 @@ export function WalletStatus() {
 
   return (
     <div className="flex items-center space-x-3">
-      <div className="flex items-center space-x-2">
-        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-        <span className="text-sm text-gray-600">Connected</span>
-      </div>
       <div className="hidden md:block">
-        <span className="text-xs text-gray-500 font-mono">
-          {address.slice(0, 6)}...{address.slice(-4)}
-        </span>
+        <ContractBalance />
       </div>
       <button
         onClick={disconnect}

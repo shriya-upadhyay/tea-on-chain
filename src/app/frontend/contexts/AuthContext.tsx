@@ -1,54 +1,39 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import { useAccount, useDisconnect } from 'wagmi';
 
 interface AuthContextType {
   isConnected: boolean;
   address: string | undefined;
   isLoading: boolean;
-  connect: (connector: any) => Promise<void>;
+  connect: () => void;
   disconnect: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const { address, isConnected, isConnecting } = useAccount();
-  const { connect, isPending } = useConnect();
-  const { disconnect } = useDisconnect();
+  const { address, isConnected } = useAccount();
+  const { disconnect: wagmiDisconnect } = useDisconnect();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Set loading to false after initial mount and when connection state is stable
+    // Set loading to false after initial mount
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000); // Give wagmi time to initialize
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
 
-  // Also update loading state when connection state changes
-  useEffect(() => {
-    if (!isConnecting && !isPending) {
-      setIsLoading(false);
-    }
-  }, [isConnecting, isPending]);
-
-  const handleConnect = async (connector: any) => {
-    try {
-      setIsLoading(true);
-      await connect({ connector });
-    } catch (error) {
-      console.error('Connection error:', error);
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
+  const handleConnect = () => {
+    // Dynamic handles connection through its widget
+    // This function can be used to trigger the Dynamic modal if needed
   };
 
   const handleDisconnect = () => {
-    disconnect();
+    wagmiDisconnect();
   };
 
   const value: AuthContextType = {
