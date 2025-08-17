@@ -7,6 +7,7 @@ export default function InfoPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [username, setusername] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [streetLine1, setStreetLine1] = useState("");
@@ -183,6 +184,30 @@ async function handleSubmit() {
                 className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 text-[#1B1B1B] placeholder-[#8B6F74]/60
                            focus:outline-none focus:ring-2 focus:ring-[#FF2D91] focus:border-transparent"
               />
+              <p className="text-xs text-[#8B6F74] mt-1">
+                For secure access & recovery only. Never shown publicly.
+              </p>
+            </div>
+
+            {/* UserName */}
+            <div className="space-y-2">
+              <label htmlFor="username" className="block text-sm font-medium text-[black]">
+                Username
+              </label>
+              <input
+                id="username"
+                type="text"
+                value={username}
+                onChange={(e) => setusername(e.target.value)}
+                placeholder="jerfisher123"
+                autoComplete="name"
+                required
+                className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 text-[#1B1B1B] placeholder-[#8B6F74]/60
+                           focus:outline-none focus:ring-2 focus:ring-[#FF2D91] focus:border-transparent"
+              />
+              <p className="text-xs text-[#8B6F74] mt-1">
+                This is the only info that Tea On-Chain will store.
+              </p>
             </div>
 
             {/* Phone Number */}
@@ -201,9 +226,6 @@ async function handleSubmit() {
                 className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 text-[#1B1B1B] placeholder-[#8B6F74]/60
                         focus:outline-none focus:ring-2 focus:ring-[#FF2D91] focus:border-transparent"
               />
-              <p className="text-xs text-[#8B6F74] mt-1">
-                For secure access & recovery only. Never shown publicly.
-              </p>
             </div>
 
             {/* Date of Birth */}
