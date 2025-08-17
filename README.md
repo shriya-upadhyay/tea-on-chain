@@ -87,6 +87,13 @@ Other apps tried to solve this (looking at you, viral “Tea” ☕), but fell s
 - **Remix-deployed contracts** for staking  
 
 ---
+## **Future Additions**
+Advanced reporting & flagging logic
+Paymaster – gasless transactions
+Background check scraping integrations
+
+## **License**
+MIT License
 
 ## 🚀 Quickstart
 
@@ -96,12 +103,5 @@ cd <repo-folder>
 npm install
 npm run dev
 
-## **Future Additions**
-Advanced reporting & flagging logic
-Paymaster – gasless transactions
-Background check scraping integrations
-
-## **License**
-MIT License
 
 
