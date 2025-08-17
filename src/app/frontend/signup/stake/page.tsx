@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { StakingButton } from "../../components/StakingButton";
+import { UnstakeButton } from "../../components/UnstakeButton";
 import { CONTRACTS } from "../../lib/contracts";
 
 export default function SignupStakePage() {
@@ -10,6 +11,11 @@ export default function SignupStakePage() {
   const handleStakeSuccess = () => {
     // Staking was successful, redirect to feed
     router.push("/frontend/feed");
+  };
+
+  const handleUnstakeSuccess = () => {
+    // Unstaking was successful, could redirect or show success message
+    console.log("Unstaking successful!");
   };
 
   return (
@@ -43,16 +49,22 @@ export default function SignupStakePage() {
             </p>
           </div>
 
-          {/* Staking Button */}
+          {/* Staking Buttons */}
           <div className="flex-1 flex items-center justify-center">
-            <div className="w-full max-w-md">
+            <div className="w-full max-w-md space-y-4">
               <StakingButton
                 onSuccess={handleStakeSuccess}
                 tokenAddress={CONTRACTS.PYUSD}
                 stakingContractAddress={CONTRACTS.STAKING}
               />
               
-              <div className="mt-6 text-xs text-[#8B6F74] text-center" style={{ fontFamily: "'Inria Sans', sans-serif" }}>
+              {/* <UnstakeButton
+                onSuccess={handleUnstakeSuccess}
+                stakingContractAddress={CONTRACTS.STAKING}
+              /> */}
+               {/* uncomment this to add unstaking button */}
+              
+              <div className="text-xs text-[#8B6F74] text-center" style={{ fontFamily: "'Inria Sans', sans-serif" }}>
                 Funds remain yours. Unstake anytime.
               </div>
             </div>
