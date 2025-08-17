@@ -24,7 +24,7 @@ export default function OnRamp() {
       // Handle the response here
       if (response.ok) {
         console.log('Onramp successful:', result);
-        router.push("/frontend/feed");
+        router.push("/frontend/signup/stake");
       } else {
         console.error('Onramp failed:', result);
       }
