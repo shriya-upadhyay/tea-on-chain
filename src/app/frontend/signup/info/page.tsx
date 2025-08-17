@@ -59,7 +59,7 @@ export default function InfoPage() {
                   type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="Jerimiah"
+                  placeholder="Belly"
                   autoComplete="given-name"
                   required
                   className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 text-[#1B1B1B] placeholder-[#8B6F74]/60
@@ -94,7 +94,7 @@ export default function InfoPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="jermiahfisher@tea.app"
+                placeholder="bellyfisher@tea.app"
                 autoComplete="email"
                 required
                 className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 text-[#1B1B1B] placeholder-[#8B6F74]/60
