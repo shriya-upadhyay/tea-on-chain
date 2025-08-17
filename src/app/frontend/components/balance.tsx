@@ -18,7 +18,7 @@ export function Balance() {
 
   // Get contract address from environment variable
   useEffect(() => {
-    const address = process.env.NEXT_PUBLIC_DEV_PYUSD || "0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d";
+    const address = "0x637A1259C6afd7E3AdF63993cA7E58BB438aB1B1";
     if (address) {
       setContractAddress(address);
     }

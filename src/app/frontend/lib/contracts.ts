@@ -1,7 +1,7 @@
 // Contract addresses configuration
 export const CONTRACTS = {
   // Token addresses
-  PYUSD: process.env.NEXT_PUBLIC_DEV_PYUSD || "0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d",
+  PYUSD: "0x637A1259C6afd7E3AdF63993cA7E58BB438aB1B1",
   
   // Contract addresses
   STAKING: process.env.NEXT_PUBLIC_DEV_STAKE_ADDRESS || "0x0000000000000000000000000000000000000000", // TODO: Add actual staking contract address
