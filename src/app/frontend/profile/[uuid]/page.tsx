@@ -137,8 +137,19 @@ export default function ProfileDetailPage() {
         {/* Profile Header */}
         <div className="bg-white/80 backdrop-blur-sm rounded-lg border border-pink-200 p-8 mb-6 shadow-lg">
           <div className="flex items-center space-x-6">
-            <div className="w-24 h-24 bg-gradient-to-br from-[#FF5884] to-[#E04A7A] rounded-full flex items-center justify-center text-white font-bold text-3xl">
-              {profile.firstName?.[0]}{profile.lastName?.[0]}
+            <div className="w-24 h-24 bg-gradient-to-br from-[#FF5884] to-[#E04A7A] rounded-full flex items-center justify-center text-white font-bold text-3xl overflow-hidden">
+              {(() => {
+                const fullName = `${profile.firstName || ''} ${profile.lastName || ''}`.toLowerCase();
+                if (fullName.includes('jer')) {
+                  return <img src="/jer.webp" alt="Profile" className="w-full h-full object-cover" />;
+                } else if (fullName.includes('con')) {
+                  return <img src="/con.webp" alt="Profile" className="w-full h-full object-cover" />;
+                } else if (fullName.includes('sauce')) {
+                  return <img src="/hot_sauce.png" alt="Profile" className="w-full h-full object-cover" />;
+                } else {
+                  return `${profile.firstName?.[0] || ''}${profile.lastName?.[0] || ''}`;
+                }
+              })()}
             </div>
             <div className="flex-1">
               <h1 className="text-3xl font-bold text-gray-800 mb-2">
