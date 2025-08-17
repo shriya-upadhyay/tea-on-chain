@@ -1,14 +1,22 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-
+import { DynamicWidget, useDynamicContext } from '@dynamic-labs/sdk-react-core';
+import { useEffect } from 'react';
 export default function ConnectWalletPage() {
   const router = useRouter();
+  const { user } = useDynamicContext();
 
-  const handleConnectWallet = async () => {
-    // TODO: plug in actual wallet connect (wagmi/privy/rainbowkit/etc.)
-    router.push("/frontend/signup/stake");
-  };
+  useEffect(() => {
+    if (user) {
+      // Small delay to show the success state briefly
+      const timer = setTimeout(() => {
+        router.push('/frontend/signup/stake');
+      }, 1500);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [user, router]);
 
   return (
     <div className="relative h-full w-full overflow-hidden">
@@ -16,8 +24,6 @@ export default function ConnectWalletPage() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/background.png')" }}
-        aria-
-
       />
       <div
         className="absolute inset-0"
@@ -39,7 +45,7 @@ export default function ConnectWalletPage() {
               className="text-[#8B6F74]"
               style={{ fontFamily: "'Inria Sans', sans-serif" }}
             >
-              Sign in with Privy or connect your wallet to continue.
+              Sign in with Dynamic or connect your wallet to continue.
             </p>
           </div>
 
@@ -50,16 +56,15 @@ export default function ConnectWalletPage() {
 
           {/* Bottom CTA */}
           <div className="pt-6">
-            <button
-              onClick={handleConnectWallet}
-              className="w-full rounded-full bg-[#1B1B1B] hover:bg-[#2A2A2A]
-                         text-white text-base sm:text-lg font-semibold py-3.5
-                         shadow-lg shadow-black/10 transition-transform hover:scale-[1.02]
-                         focus:outline-none focus:ring-2 focus:ring-[#FF2D91]/40"
-              style={{ fontFamily: "'Inria Sans', sans-serif" }}
-            >
-              Connect Wallet
-            </button>
+          <DynamicWidget />
+          
+          {/* Show redirect message when wallet is connected */}
+          {user && (
+            <div className="mt-6 pt-6 border-t border-pink-200 text-center">
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#FF5884] mx-auto mb-2"></div>
+              <p className="text-sm text-gray-600">Wallet connected! Redirecting to stake page...</p>
+            </div>
+          )}
           </div>
         </div>
       </div>
