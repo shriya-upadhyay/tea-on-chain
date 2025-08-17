@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import codes from "@/app/frontend/components/most_recent_occupations.json" assert { type: "json" };
+import locales from "@/app/frontend/components/locales.json" assert { type: "json" };
 
 export default function InfoPage() {
   const [firstName, setFirstName] = useState("");
@@ -319,23 +321,48 @@ async function handleSubmit() {
             {/* National ID Fields */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
               <div className="space-y-2">
-              <label htmlFor="nationalIdIssuingCountry" className="block text-sm font-medium text-[black]">
-                National ID Issuing Country
-              </label>
-              <input
-                id="nationalIdIssuingCountry"
-                type="text"
-                value={nationalIdIssuingCountry}
-                onChange={(e) => {
-                // Only allow up to 2 characters, uppercase
-                setnationalIdIssuingCountry(e.target.value.toUpperCase().slice(0, 2));
-                }}
-                placeholder="US"
-                maxLength={2}
-                required
-                className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 text-[#1B1B1B] placeholder-[#8B6F74]/60
-                     focus:outline-none focus:ring-2 focus:ring-[#FF2D91] focus:border-transparent"
-              />
+                <label
+                  htmlFor="nationalIdIssuingCountry"
+                  className="block text-sm font-medium text-[black]"
+                >
+                  National ID Issuing Country
+                </label>
+                <select
+                  id="nationalIdIssuingCountry"
+                  value={nationalIdIssuingCountry}
+                  onChange={(e) => setnationalIdIssuingCountry(e.target.value)}
+                  required
+                  className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 text-[#1B1B1B] placeholder-[#8B6F74]/60
+                            focus:outline-none focus:ring-2 focus:ring-[#FF2D91] focus:border-transparent"
+                >
+                  <option value="" disabled>
+                    Select country
+                  </option>
+                  {[
+                    "AD","AE","AF","AG","AI","AL","AM","AO","AQ","AR","AS","AT","AU","AZ",
+                    "BA","BB","BD","BE","BF","BG","BH","BI","BJ","BM","BN","BO","BQ","BR",
+                    "BS","BT","BW","BY","BZ","CA","CC","CD","CF","CG","CH","CI","CK","CL",
+                    "CM","CN","CO","CR","CU","CV","CW","CY","CZ","DE","DJ","DK","DM","DO",
+                    "DZ","EC","EE","EG","ER","ES","ET","FI","FJ","FK","FM","FO","FR","GA",
+                    "GB","GD","GE","GF","GG","GH","GI","GL","GM","GN","GP","GQ","GR","GT",
+                    "GU","GW","GY","HK","HN","HR","HT","HU","ID","IE","IL","IM","IN","IO",
+                    "IQ","IR","IS","IT","JE","JM","JO","JP","KE","KG","KH","KI","KM","KN",
+                    "KP","KR","KW","KY","KZ","LA","LB","LC","LI","LK","LR","LS","LT","LU",
+                    "LV","LY","MA","MC","MD","ME","MF","MG","MH","MK","ML","MM","MN","MO",
+                    "MP","MQ","MR","MS","MT","MU","MV","MW","MX","MY","MZ","NA","NC","NE",
+                    "NF","NG","NI","NL","NO","NP","NR","NU","NZ","OM","PA","PE","PF","PG",
+                    "PH","PK","PL","PM","PN","PR","PS","PT","PW","PY","QA","RE","RO","RS",
+                    "RU","RW","SA","SB","SC","SD","SE","SG","SH","SI","SJ","SK","SL","SM",
+                    "SN","SO","SR","SS","ST","SV","SX","SY","SZ","TC","TD","TF","TG","TH",
+                    "TJ","TK","TL","TM","TN","TO","TR","TT","TV","TZ","UA","UG","UM","US",
+                    "UY","UZ","VA","VC","VE","VG","VI","VN","VU","WF","WS","YE","YT","ZA",
+                    "ZM","ZW"
+                  ].map((code) => (
+                    <option key={code} value={code}>
+                      {code}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className="space-y-2">
                 <label htmlFor="nationalIdType" className="block text-sm font-medium text-[black]">
@@ -374,30 +401,56 @@ async function handleSubmit() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div className="space-y-2">
                 <label htmlFor="countryCode" className="block text-sm font-medium text-[black]">Country Code</label>
-                <input
-                  id="countryCode"
-                  type="text"
-                  value={countryCode}
-                  maxLength={2}
-                  onChange={(e) => setCountryCode(e.target.value)}
-                  placeholder="US"
-                  required
-                  className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 text-[#1B1B1B] placeholder-[#8B6F74]/60
-                             focus:outline-none focus:ring-2 focus:ring-[#FF2D91] focus:border-transparent"
-                />
+                <select
+    id="countryCode"
+    value={countryCode}
+    onChange={(e) => setCountryCode(e.target.value)}
+    required
+    className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 text-[#1B1B1B]
+               focus:outline-none focus:ring-2 focus:ring-[#FF2D91] focus:border-transparent"
+  >
+    <option value="" disabled>Select country</option>
+    {[
+      "AD","AE","AF","AG","AI","AL","AM","AO","AQ","AR","AS","AT","AU","AZ",
+      "BA","BB","BD","BE","BF","BG","BH","BI","BJ","BM","BN","BO","BQ","BR",
+      "BS","BT","BW","BY","BZ","CA","CC","CD","CF","CG","CH","CI","CK","CL",
+      "CM","CN","CO","CR","CU","CV","CW","CY","CZ","DE","DJ","DK","DM","DO",
+      "DZ","EC","EE","EG","ER","ES","ET","FI","FJ","FK","FM","FO","FR","GA",
+      "GB","GD","GE","GF","GG","GH","GI","GL","GM","GN","GP","GQ","GR","GT",
+      "GU","GW","GY","HK","HN","HR","HT","HU","ID","IE","IL","IM","IN","IO",
+      "IQ","IR","IS","IT","JE","JM","JO","JP","KE","KG","KH","KI","KM","KN",
+      "KP","KR","KW","KY","KZ","LA","LB","LC","LI","LK","LR","LS","LT","LU",
+      "LV","LY","MA","MC","MD","ME","MF","MG","MH","MK","ML","MM","MN","MO",
+      "MP","MQ","MR","MS","MT","MU","MV","MW","MX","MY","MZ","NA","NC","NE",
+      "NF","NG","NI","NL","NO","NP","NR","NU","NZ","OM","PA","PE","PF","PG",
+      "PH","PK","PL","PM","PN","PR","PS","PT","PW","PY","QA","RE","RO","RS",
+      "RU","RW","SA","SB","SC","SD","SE","SG","SH","SI","SJ","SK","SL","SM",
+      "SN","SO","SR","SS","ST","SV","SX","SY","SZ","TC","TD","TF","TG","TH",
+      "TJ","TK","TL","TM","TN","TO","TR","TT","TV","TZ","UA","UG","UM","US",
+      "UY","UZ","VA","VC","VE","VG","VI","VN","VU","WF","WS","YE","YT","ZA",
+      "ZM","ZW"
+    ].map((code) => (
+      <option key={code} value={code}>{code}</option>
+    ))}
+  </select>
               </div>
               <div className="space-y-2">
                 <label htmlFor="locale" className="block text-sm font-medium text-[black]">Locale</label>
-                <input
+                <select
                   id="locale"
-                  type="text"
                   value={locale}
                   onChange={(e) => setLocale(e.target.value)}
-                  placeholder="en-US"
                   required
-                  className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 text-[#1B1B1B] placeholder-[#8B6F74]/60
-                             focus:outline-none focus:ring-2 focus:ring-[#FF2D91] focus:border-transparent"
-                />
+                  className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 text-[#1B1B1B]
+                            focus:outline-none focus:ring-2 focus:ring-[#FF2D91] focus:border-transparent"
+                >
+                  <option value="" disabled>Select locale</option>
+                  {locales.locales.map((loc: string) => (
+                    <option key={loc} value={loc}>
+                      {loc}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
 
@@ -423,16 +476,22 @@ async function handleSubmit() {
               </div>
               <div className="space-y-2">
                 <label htmlFor="mostRecentOccupation" className="block text-sm font-medium text-[black]">Most Recent Occupation</label>
-                <input
-                  id="mostRecentOccupation"
-                  type="text"
+                <select
+                  id="occupationCode"
                   value={mostRecentOccupation}
                   onChange={(e) => setMostRecentOccupation(e.target.value)}
-                  placeholder="132011"
                   required
-                  className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 text-[#1B1B1B] placeholder-[#8B6F74]/60
-                             focus:outline-none focus:ring-2 focus:ring-[#FF2D91] focus:border-transparent"
-                />
+                  className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 
+                            text-[#1B1B1B] focus:outline-none focus:ring-2 
+                            focus:ring-[#FF2D91] focus:border-transparent"
+                >
+                  <option value="" disabled>Select code</option>
+                  {codes.codes.map((code) => (
+                    <option key={code} value={code}>
+                      {code}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
 
@@ -506,17 +565,27 @@ async function handleSubmit() {
 
             {/* Expected Monthly Payments */}
             <div className="space-y-2">
-              <label htmlFor="expectedMonthlyPaymentsUsd" className="block text-sm font-medium text-[black]">Expected Monthly Payments (USD)</label>
-              <input
-                id="expectedMonthlyPaymentsUsd"
-                type="text"
-                value={expectedMonthlyPaymentsUsd}
-                onChange={(e) => setExpectedMonthlyPaymentsUsd(e.target.value)}
-                placeholder="5000"
-                required
-                className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 text-[#1B1B1B] placeholder-[#8B6F74]/60
-                           focus:outline-none focus:ring-2 focus:ring-[#FF2D91] focus:border-transparent"
-              />
+              <label htmlFor="expectedMonthlyPaymentsUsd" className="block text-sm font-medium text-[black]">
+              Expected Monthly Payments (USD)
+              </label>
+              <select
+              id="expectedMonthlyPaymentsUsd"
+              value={expectedMonthlyPaymentsUsd}
+              onChange={(e) => setExpectedMonthlyPaymentsUsd(e.target.value)}
+              required
+              className="w-full rounded-2xl border border-pink-200/80 bg-white/70 px-4 py-3 text-[#1B1B1B] focus:outline-none focus:ring-2 focus:ring-[#FF2D91] focus:border-transparent"
+              >
+              <option value="" disabled>Select range</option>
+              <option value="LESS_THAN_5000">Less than $5,000</option>
+              <option value="BETWEEN_5000_9999">$5,000 - $9,999</option>
+              <option value="BETWEEN_10000_49999">$10,000 - $49,999</option>
+              <option value="OVER_50000">Over $50,000</option>
+              <option value="LESS_THAN_10000">Less than $10,000</option>
+              <option value="BETWEEN_10000_99999">$10,000 - $99,999</option>
+              <option value="BETWEEN_100000_999999">$100,000 - $999,999</option>
+              <option value="BETWEEN_1000000_9999999">$1,000,000 - $9,999,999</option>
+              <option value="OVER_10000000">Over $10,000,000</option>
+              </select>
             </div>
 
             {/* Government ID and Images */}
