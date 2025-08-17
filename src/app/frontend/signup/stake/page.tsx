@@ -45,7 +45,7 @@ export default function SignupStakePage() {
               className="text-[#8B6F74] max-w-xl mx-auto"
               style={{ fontFamily: "'Inria Sans', sans-serif" }}
             >
-              Stake 2 USDC to read and write posts. Earn each time your post is read.
+              Stake 20 USDC to read and write posts. Earn each time your post is read.
             </p>
           </div>
 
