@@ -38,8 +38,8 @@ export function StakingButton({
         throw new Error("Failed to get wallet clients");
       }
 
-      // Fixed stake amount: 2 USDC (6 decimals)
-      const amountToStake = parseUnits("2", 6);
+      // Fixed stake amount: 20 USDC (6 decimals)
+      const amountToStake = parseUnits("20", 6);
 
       // Create ERC20 contract instance
       const tokenContract = getContract({
@@ -116,7 +116,7 @@ export function StakingButton({
             Staking...
           </div>
         ) : (
-          "Stake 2 USDC"
+          "Stake 20 USDC"
         )}
       </button>
 
