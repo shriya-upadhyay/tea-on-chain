@@ -1,137 +1,107 @@
-# Tea on Chain Frontend
+# 🍵 TEA on-chain – Spill the Tea, Not Your Data
 
-A modern, responsive frontend application for the Tea on Chain platform, built with Next.js 14, TypeScript, and Tailwind CSS.
+Welcome to **TEA** — the on-chain safety net that helps women share red flags about men *without* giving up their privacy.  
+Think of it as “are we dating the same guy?” meets crypto security — but without the creepy data leaks.  
 
-## Features
+---
 
-- **Home Page**: Welcome page with platform overview and statistics
-- **Signup Page**: User registration form with validation
-- **ID Page**: Digital identity management and profile viewing
-- **Stake Page**: Token staking interface with multiple pools
-- **Surf Page**: Tea market exploration with search and filtering
-- **Instruction Popup Component**: Reusable modal for displaying instructions
-- **Responsive Design**: Mobile-first design with Tailwind CSS
-- **TypeScript**: Full type safety throughout the application
+## 🚨 The Problem
 
-## Project Structure
+Dating today is… tricky. The stats say it all:
 
-```
-src/app/
-├── frontend/                 # Main frontend application
-│   ├── components/          # Reusable components
-│   │   ├── InstructionPopup.tsx
-│   │   └── index.ts
-│   ├── id/                  # ID/Profile page
-│   │   └── page.tsx
-│   ├── signup/              # Signup page
-│   │   └── page.tsx
-│   ├── stake/               # Staking page
-│   │   └── page.tsx
-│   ├── surf/                # Market surfing page
-│   │   └── page.tsx
-│   ├── layout.tsx           # Frontend layout with navigation
-│   └── page.tsx             # Home page
-├── layout.tsx               # Root layout
-├── page.tsx                 # Root page (redirects to frontend)
-└── globals.css              # Global styles
-```
+- **91% of single women in the U.S.** worry about safety when dating.  
+- **44% have felt unsafe** on a date (and **78%** of those unsafe dates started online).  
+  👉 [Source](https://www.datingnews.com/industry-trends/single-women-dating-safety-statistics/?utm_source=chatgpt.com)
 
-## Getting Started
+- **70% of women** snoop online before meeting a guy (versus only 45% of men 🤔).  
+- **40% actually find sketchy stuff** (fake jobs, catfish pics, etc.)  
+  👉 [Source](https://www.security.org/safety-while-dating/?utm_source=chatgpt.com)
 
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+Other apps tried to solve this (looking at you, viral “Tea” ☕), but fell short with **data leaks** and **malicious trolls**.  
+👉 [Case in point](https://www.bbc.com/news/articles/c7vl57n74pqo)
 
-2. **Run the development server**:
-   ```bash
-   npm run dev
-   ```
+---
 
-3. **Open your browser** and navigate to `http://localhost:3000`
+## ✨ Our Spill-Proof Solution
 
-## Pages Overview
+- **Women-only red flag reports**  
+  Share the tea without spilling your personal info (seriously, check the code).  
 
-### Home Page (`/frontend`)
-- Platform introduction and features
-- Quick navigation to other sections
-- Platform statistics display
+- **Staking = Skin in the Game**  
+  Post garbage, lose your stake. Post truth, protect the community.  
 
-### Signup Page (`/frontend/signup`)
-- User registration form
-- Form validation
-- Terms and conditions agreement
+- **Web2-smooth, Web3-strong**  
+  - No crypto knowledge needed.  
+  - No wallets to manage.  
+  - No scary signing pop-ups.  
+  - On/off-ramp with ease.  
 
-### ID Page (`/frontend/id`)
-- Digital identity display
-- Editable profile information
-- Reputation and statistics
-- Quick action buttons
+- **TL;DR**: It gives the benefits of decentralization without the friction of blockchain. 
 
-### Stake Page (`/frontend/stake`)
-- Multiple staking pools with different APY rates
-- Token staking interface
-- Position management
-- Reward claiming
+---
 
-### Surf Page (`/frontend/surf`)
-- Tea market exploration
-- Search and filtering capabilities
-- Tea item display with ratings and prices
-- Shopping cart functionality
+## 📜 Contracts
 
-## Components
+### Demo (Arbitrum Sepolia)
+- 👩 **User**: `0x1f670b6db6cacfb6bb37e42831e6080debc928a6`  
+  [View on Arbiscan](https://sepolia.arbiscan.io/address/0x1f670b6db6cacfb6bb37e42831e6080debc928a6)  
+- 🛡️ **Admin**: `0x6DcdF2D57F55953ee170373bdb41b749a645C91e`
+### (Arbitrum Sepolia)
+- 💰 **Staking Contract**: `0x3Ff6Ca942eE9B5336433E884117C94Cd39058fA2`  
+- 💵 **PYUSD**: `0x637A1259C6afd7E3AdF63993cA7E58BB438aB1B1`  
 
-### InstructionPopup
-A reusable modal component for displaying instructions and information:
-- Customizable title and content
-- Auto-close functionality
-- Responsive design
-- Backdrop click to close
+### Production (Arbitrum)
+- 🚀 **Staking Contract**: *Coming soon*  
+- 💵 **PYUSD**: `0x46850ad61c2b7d64d08c9c754f45254596696984`  
 
-## Styling
+---
 
-The application uses Tailwind CSS for styling with a consistent green tea theme:
-- Primary colors: Green shades (`green-600`, `green-700`, etc.)
-- Background: Gradient backgrounds with transparency
-- Cards: White backgrounds with backdrop blur effects
-- Responsive: Mobile-first design with responsive breakpoints
+## 🔄 User Flow (aka How to Spill Safely)
 
-## Navigation
+1. ✉️ Log in with a magic link (Dynamic).  
+2. 🪪 Pass KYC with Fern.  
+3. 🕵️ Verify “yes, I’m female” via ZK proof (privacy FTW).  
+4. 💸 Onramp funds.  
+5. 🪙 Stake **$20 PYUSD** — slashable if you act sus.  
+6. ☕ Leave reviews or check others’ TEA.  
+7. 🏦 Unstake + cash out when you’re done.  
 
-The frontend includes a sticky navigation header with:
-- Logo and branding
-- Navigation links to all major sections
-- Mobile-responsive hamburger menu
-- Consistent navigation across all pages
+---
 
-## Future Enhancements
+## Stack
 
-- User authentication and login
-- Wallet integration
-- Real-time data updates
-- Advanced filtering and sorting
-- User reviews and ratings
-- Shopping cart and checkout
-- Admin dashboard
-- API integration with blockchain
+### Frontend
+- **Next.js app**  
+- **Dynamic** – embedded wallet + magic link sign-in  
+- **Viem** – contract reads/writes  
 
-## Technologies Used
+### Encryption
+- **Google Gemini API (OCR)** – extract structured data (e.g., gender) from driver’s licenses.  
+- **snarkjs ZK circuit** – verify “Sex/Gender = Female” without exposing personal data.  
+- **Privacy-preserving design** – no photos, names, or IDs stored.  
 
-- **Next.js 14**: React framework with App Router
-- **TypeScript**: Type-safe JavaScript
-- **Tailwind CSS**: Utility-first CSS framework
-- **React Hooks**: State management and side effects
-- **Responsive Design**: Mobile-first approach
+### Backend
+- **MongoDB** database  
+- **Next.js API routes**  
+- **Fern** – onramp/offramp logic  
+- **Remix-deployed contracts** for staking  
 
-## Contributing
+---
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+## 🚀 Quickstart
 
-## License
+```bash
+git clone <repo-url>
+cd <repo-folder>
+npm install
+npm run dev
 
-This project is licensed under the MIT License.
+## **Future Additions**
+Advanced reporting & flagging logic
+Paymaster – gasless transactions
+Background check scraping integrations
+
+## **License**
+MIT License
+
+
