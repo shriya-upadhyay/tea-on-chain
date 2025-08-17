@@ -1,0 +1,17 @@
+{ "locales": [
+  "en-US", 
+  "en-GB", 
+  "fr-FR", 
+  "fr-CA", 
+  "es-ES", 
+  "es-MX", 
+  "de-DE", 
+  "it-IT", 
+  "ja-JP", 
+  "zh-CN", 
+  "zh-TW", 
+  "hi-IN", 
+  "ar-SA", 
+  "pt-BR", 
+  "pt-PT"  
+] }
