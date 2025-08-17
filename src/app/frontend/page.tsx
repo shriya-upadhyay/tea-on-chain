@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 export default function HomePage() {
   const router = useRouter();
-  const handleFindTea = () => router.push("/frontend/signup/info");
+  const handleFindTea = () => router.push("/frontend/signup/connect_wallet");
 
   return (
     <div className="grid h-full grid-cols-1 md:grid-cols-2">

@@ -11,7 +11,7 @@ export default function ConnectWalletPage() {
     if (user) {
       // Small delay to show the success state briefly
       const timer = setTimeout(() => {
-        router.push('/frontend/signup/stake');
+        router.push('/frontend/signup/info');
       }, 1500);
       
       return () => clearTimeout(timer);
