@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import { getWomanNameByUUID } from '../../lib/women';
 
 interface Review {
   uuid: string;
@@ -209,7 +210,9 @@ export default function ProfileDetailPage() {
               reviews.map((review) => (
                 <div key={review.uuid} className="border-l-4 border-[#FF5884] pl-4 py-3 bg-gray-50 rounded-r-lg">
                   <p className="text-gray-800">{review.review}</p>
-                  <p className="text-sm text-gray-500 mt-2">By: {review.woman}</p>
+                  <p className="text-sm text-gray-500 mt-2">
+                    By: {review.woman === 'temp-woman-uuid' ? getWomanNameByUUID(review.uuid) : review.woman}
+                  </p>
                 </div>
               ))
             )}
