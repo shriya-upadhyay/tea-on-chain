@@ -1,6 +1,7 @@
 // app/frontend/layout.tsx
 import Link from "next/link";
-
+import { DynamicContextProvider } from '@dynamic-labs/sdk-react-core';
+import { EthereumWalletConnectors } from '@dynamic-labs/ethereum';
 export const metadata = {
   title: "Tea on Chain - Frontend",
   description: "Tea on Chain application frontend",
@@ -8,8 +9,14 @@ export const metadata = {
 
 export default function FrontendLayout({ children }: { children: React.ReactNode }) {
   return (
-
+    <DynamicContextProvider
+      settings={{
+        environmentId: process.env.NEXT_PUBLIC_DYNAMIC_ENVIRONMENT_ID || '858ed354-fd4f-462a-bdbe-834e4406a0d7',
+        walletConnectors: [EthereumWalletConnectors],
+      }}
+    >
     <div className="bg-gradient-to-br from-pink-50 to-rose-100 min-h-dvh grid grid-rows-[auto_1fr]">
+
       {/* NAV */}
       <nav className="sticky top-0 z-50 h-16 bg-white border-b border-pink-200/80 shadow-sm">
         <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -39,5 +46,6 @@ export default function FrontendLayout({ children }: { children: React.ReactNode
       {/* MAIN fills the rest; your pages use h-full inside */}
       <main className="h-full overflow-hidden">{children}</main>
     </div>
+    </DynamicContextProvider>
   );
 }

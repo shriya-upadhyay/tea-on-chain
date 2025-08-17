@@ -16,7 +16,6 @@ export default function SignupStakePage() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/background.png')" }}
-        aria-
       />
       {/* Soft brand overlay */}
       <div
