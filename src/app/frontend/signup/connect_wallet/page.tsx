@@ -39,24 +39,24 @@ export default function ConnectWalletPage() {
             className="text-3xl sm:text-4xl font-bold text-[#582A55] tracking-tight mb-4 sm:mb-5"
             style={{ fontFamily: "'Moirai One', cursive" }}
           >
-            Connect your wallet
+            Log in your account
           </h1>
-            <p
+            {/* <p
               className="text-[#8B6F74]"
               style={{ fontFamily: "'Inria Sans', sans-serif" }}
             >
               Sign in with Dynamic or connect your wallet to continue.
             </p>
-          </div>
+          </div> */}
 
-          {/* Middle: reserved space for providers */}
           <div className="flex-1 flex items-center justify-center">
-            {/* TODO: add Privy / RainbowKit / WalletConnect UI here */}
+            <div className="w-full max-w-md">
+              <DynamicWidget 
+                buttonClassName="w-full bg-black hover:bg-gray-800 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#FF2D91]/40"
+              />
+            </div>
           </div>
 
-          {/* Bottom CTA */}
-          <div className="pt-6">
-          <DynamicWidget />
           
           {/* Show redirect message when wallet is connected */}
           {user && (
