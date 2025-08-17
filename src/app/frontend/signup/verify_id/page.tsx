@@ -42,7 +42,6 @@ export default function VerifyId() {
   const clearSelfie = () => setSelfieFile(null);
 
   const handleVerify = async () => {
-    if (!idFile || !selfieFile) return;
 
     // ================== VERIFICATION PLACEHOLDER ==================
     // TODO: Add your ephemeral verification logic here WITHOUT storage.
@@ -57,10 +56,33 @@ export default function VerifyId() {
     // if (ok) router.push("/frontend/signup/connect_wallet");
     // else setError("Couldn't verify. Try again.");
 
-    router.push("/frontend/signup/connect_wallet");
+    if (!idFile) return;
+
+  const formData = new FormData();
+  formData.append('image', idFile);  // The actual ID file
+  formData.append('id', 'some-id'); // Ensure this key matches what the backend expects
+
+  try {
+    const response = await fetch('http://localhost:3000/api/verify-female', {
+      method: 'POST',
+      body: formData,  // Send the form data to the backend
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      console.log('Verification successful:', result);
+      // router.push("/frontend/signup/connect_wallet");
+    } else {
+      console.error('Verification failed:', result.message || result.error);
+    }
+  } catch (error) {
+    console.error('Error submitting verification:', error);
+  }
+
   };
 
-  const disabled = !idFile || !selfieFile;
+  const disabled = !idFile;
 
   return (
     <div className="relative h-full w-full overflow-hidden">
@@ -83,7 +105,7 @@ export default function VerifyId() {
             </h1>
               Set up your tea account - spill safely.
             <p className="mt-2 text-base sm:text-lg text-[#8B6F74]" style={{ fontFamily: "'Inria Sans', sans-serif" }}>
-              Upload a photo of your ID and a selfie. Files stay in memory for this step only.
+              Upload a photo of your ID. Files stay in memory for this step only.
             </p>
           </div>
 
@@ -111,41 +133,6 @@ export default function VerifyId() {
                 <div className="mt-2 flex items-center justify-between text-sm text-[#8B6F74]">
                   <span className="truncate">{idFile.name}</span>
                   <button onClick={clearId} className="underline hover:no-underline text-[#582A55]">
-                    Remove
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Selfie Upload */}
-            <div>
-              <label className="block text-sm font-medium text-[#582A55] mb-2">Selfie</label>
-
-              <label
-                htmlFor="selfie-upload"
-                className="flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-pink-300/80 bg-white/60 px-4 py-8 text-center cursor-pointer hover:border-[#FF2D91] transition-colors"
-              >
-                {selfiePreview ? (
-                  <img src={selfiePreview} alt="Selfie preview" className="max-h-40 rounded-xl object-contain" />
-                ) : (
-                  <>
-                    <span className="text-sm text-[#8B6F74]">Click to upload a selfie (no hat, good light)</span>
-                    <span className="text-xs text-[#8B6F74]">JPG/PNG, up to ~10MB</span>
-                  </>
-                )}
-              </label>
-              <input
-                id="selfie-upload"
-                type="file"
-                accept="image/*"
-                capture="user" /* on mobile, suggests front camera */
-                onChange={onSelectSelfie}
-                className="hidden"
-              />
-              {selfieFile && (
-                <div className="mt-2 flex items-center justify-between text-sm text-[#8B6F74]">
-                  <span className="truncate">{selfieFile.name}</span>
-                  <button onClick={clearSelfie} className="underline hover:no-underline text-[#582A55]">
                     Remove
                   </button>
                 </div>

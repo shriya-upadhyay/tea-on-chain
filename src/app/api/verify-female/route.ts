@@ -231,6 +231,8 @@ export async function POST(request: NextRequest) {
     
     // Step 1: Verify if the document shows female - pass actual MIME type
     const isFemale = await is_female(imageBuffer, imageFile.type);
+
+    console.log("Is Female: ", isFemale);
     
     if (!isFemale) {
       return NextResponse.json<VerificationResponse>(
@@ -245,6 +247,7 @@ export async function POST(request: NextRequest) {
     // Step 2: Generate commitment, secret, and verification token
     const commitmentData = await generateCommitmentForVerification(imageId, isFemale);
     
+    console.log("Commitment data: ", commitmentData)
     if (!commitmentData) {
       return NextResponse.json<VerificationResponse>(
         { 
@@ -262,6 +265,8 @@ export async function POST(request: NextRequest) {
       commitmentData.userSecret,
       imageId
     );
+
+    console.log("ZK Proof: ", zkProof)
     
     return NextResponse.json<VerificationResponse>({
       success: true,
@@ -269,7 +274,7 @@ export async function POST(request: NextRequest) {
       commitment: commitmentData.commitment,
       verificationToken: commitmentData.verificationToken,
       message: 'Successfully generated zero-knowledge proof of female verification. Save the verification token to verify the proof later.'
-    });
+    }, { status: 200 });
     
   } catch (error) {
     // Don't log full error in production to avoid PII leaks
