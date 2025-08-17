@@ -10,7 +10,7 @@ export default function HomePage() {
     <div className="grid h-full grid-cols-1 md:grid-cols-2">
       {/* LEFT: hero art */}
       <div
-        className="h-full bg-[#FF4F7A] bg-no-repeat bg-left-bottom bg-[length:70%]"
+        className="h-full bg-[#FF5884] bg-no-repeat bg-left-bottom bg-[length:70%]"
         style={{ backgroundImage: "url('/omg-girl.png')" }}
       />
 

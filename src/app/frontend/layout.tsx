@@ -32,6 +32,9 @@ export default function FrontendLayout({ children }: { children: React.ReactNode
             <Link href="/frontend/signup/info" className="px-3 py-2 rounded-full text-sm text-[#582A55]/85 hover:text-[#582A55] hover:bg-[#FFF5F8]">
               User Info
             </Link>
+            <Link href="/frontend/signup/verify_id" className="px-3 py-2 rounded-full text-sm text-[#582A55]/85 hover:text-[#582A55] hover:bg-[#FFF5F8]">
+              Verify Id
+            </Link>
             <Link href="/frontend/signup/connect_wallet" className="px-3 py-2 rounded-full text-sm text-[#582A55]/85 hover:text-[#582A55] hover:bg-[#FFF5F8]">
               Connect Wallet
             </Link>
