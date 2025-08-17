@@ -74,22 +74,6 @@ export default function FeedPage() {
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-start px-4 sm:px-6 py-8">
         <div className="w-full max-w-4xl">
-          {/* Header */}
-          <div className="text-center mb-8 sm:mb-10">
-            <h1
-              className="text-3xl sm:text-4xl font-bold text-[#582A55] tracking-tight mb-4"
-              style={{ fontFamily: "'Moirai One', cursive" }}
-            >
-              🍵 Tea Feed
-            </h1>
-            <p
-              className="text-base sm:text-lg text-[#8B6F74] max-w-2xl mx-auto"
-              style={{ fontFamily: "'Inria Sans', sans-serif" }}
-            >
-              Search for profiles and discover the tea. Can't find someone? Add them to the feed.
-            </p>
-          </div>
-
           {/* Search Section */}
           <div className="card mb-8">
             <div className="text-center mb-6">
