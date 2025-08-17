@@ -1,12 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { StakingButton } from "../../components/StakingButton";
+import { CONTRACTS } from "../../lib/contracts";
 
 export default function SignupStakePage() {
   const router = useRouter();
 
-  const handleStake = () => {
-    // TODO: integrate staking flow; on success:
+  const handleStakeSuccess = () => {
+    // Staking was successful, redirect to feed
     router.push("/frontend/feed");
   };
 
@@ -37,30 +39,22 @@ export default function SignupStakePage() {
               className="text-[#8B6F74] max-w-xl mx-auto"
               style={{ fontFamily: "'Inria Sans', sans-serif" }}
             >
-              Stake to read and write posts. Earn each time your post is read.
+              Stake 2 USDC to read and write posts. Earn each time your post is read.
             </p>
           </div>
 
-          {/* Middle spacer (room for stake inputs later) */}
+          {/* Staking Button */}
           <div className="flex-1 flex items-center justify-center">
-            {/* TODO: add stake amount / network selector here */}
-          </div>
-
-          {/* CTA */}
-          <div className="pt-4">
-            <button
-              onClick={handleStake}
-              className="w-full rounded-full bg-[#1B1B1B] hover:bg-[#2A2A2A]
-                         text-white text-base sm:text-lg font-semibold py-3.5
-                         shadow-lg shadow-black/10 transition-transform hover:scale-[1.02]
-                         focus:outline-none focus:ring-2 focus:ring-[#FF2D91]/40"
-              style={{ fontFamily: "'Inria Sans', sans-serif" }}
-            >
-              Stake USDC
-            </button>
-
-            <div className="mt-6 text-xs text-[#8B6F74]" style={{ fontFamily: "'Inria Sans', sans-serif" }}>
-              Funds remain yours. Unstake anytime.
+            <div className="w-full max-w-md">
+              <StakingButton
+                onSuccess={handleStakeSuccess}
+                tokenAddress={CONTRACTS.PYUSD}
+                stakingContractAddress={CONTRACTS.STAKING}
+              />
+              
+              <div className="mt-6 text-xs text-[#8B6F74] text-center" style={{ fontFamily: "'Inria Sans', sans-serif" }}>
+                Funds remain yours. Unstake anytime.
+              </div>
             </div>
           </div>
         </div>
