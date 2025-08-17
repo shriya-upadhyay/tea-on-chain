@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { DynamicContextProvider } from '@dynamic-labs/sdk-react-core';
 import { EthereumWalletConnectors } from '@dynamic-labs/ethereum';
+import { Balance } from './components/balance';
+
 export const metadata = {
   title: "Tea on Chain - Frontend",
   description: "Tea on Chain application frontend",
@@ -39,6 +41,9 @@ export default function FrontendLayout({ children }: { children: React.ReactNode
             <Link href="/frontend/feed" className="px-3 py-2 rounded-full text-sm text-[#582A55]/85 hover:text-[#582A55] hover:bg-[#FFF5F8]">
               Feed
             </Link>
+            <div className="flex items-center space-x-4">
+                <Balance />
+              </div>
           </div>
         </div>
       </nav>
