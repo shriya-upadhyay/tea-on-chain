@@ -38,9 +38,17 @@ export default function FrontendLayout({ children }: { children: React.ReactNode
             <Link href="/frontend/signup/stake" className="px-3 py-2 rounded-full text-sm text-[#582A55]/85 hover:text-[#582A55] hover:bg-[#FFF5F8]">
               Stake
             </Link>
+            <Link href="/frontend/onramp" className="px-3 py-2 rounded-full text-sm text-[#582A55]/85 hover:text-[#582A55] hover:bg-[#FFF5F8]">
+              Onramp
+            </Link>
             <Link href="/frontend/feed" className="px-3 py-2 rounded-full text-sm text-[#582A55]/85 hover:text-[#582A55] hover:bg-[#FFF5F8]">
               Feed
             </Link>
+            <Link href="/frontend/offramp" className="px-3 py-2 rounded-full text-sm text-[#582A55]/85 hover:text-[#582A55] hover:bg-[#FFF5F8]">
+              Offramp
+            </Link>
+
+            
             <div className="flex items-center space-x-4">
                 <Balance />
               </div>
