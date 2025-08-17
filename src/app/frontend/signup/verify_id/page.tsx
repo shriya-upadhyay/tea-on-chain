@@ -72,7 +72,7 @@ export default function VerifyId() {
 
     if (result.success) {
       console.log('Verification successful:', result);
-      router.push("/frontend/signup/onramp");
+      router.push("/frontend/onramp");
     } else {
       console.error('Verification failed:', result.message || result.error);
     }
